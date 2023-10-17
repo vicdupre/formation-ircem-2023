@@ -1,23 +1,9 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FakeStoreContext } from "../contexts/FakeStoreContext";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    axios.get("https://fakestoreapi.com/products").then((res) => {
-      console.log(res.data);
-      setProducts(res.data);
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) {
-    return <p>Chargement....</p>;
-  }
+  const products = useContext(FakeStoreContext);
 
   return (
     <>

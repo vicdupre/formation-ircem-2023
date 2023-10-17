@@ -7,6 +7,8 @@ import Clock from "../components/Clock";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addPerson, removePerson } from "../redux/actions/peopleActions";
 
 const random = () => Math.floor(Math.random() * 255);
 
@@ -27,8 +29,8 @@ const Home = () => {
   );
   const [shouldShowClock, setShouldShowClock] = useState(true);
 
-  const [list, setList] = useState([]);
-
+  const people = useSelector((state) => state.people);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -38,11 +40,11 @@ const Home = () => {
   });
 
   const handleSubmit = (values) => {
-    const newList = list.slice();
-    newList.push(values);
-    setList(newList);
-    navigate("/list");
-    //setList(list => [...list, formData]);
+    dispatch(addPerson(values.name, values.firstName, values.age));
+  };
+
+  const handleDelete = (id) => {
+    dispatch(removePerson(id));
   };
 
   const formik = useFormik({
@@ -115,10 +117,13 @@ const Home = () => {
         <button type="submit">Envoyer</button>
       </form>
       <ul>
-        {list.map((element, index) => {
+        {people.map((element, index) => {
           return (
             <li key={index}>
-              {element.firstName} {element.name}
+              {element.firstName} {element.name}{" "}
+              <button onClick={() => handleDelete(element.id)}>
+                Supprimer
+              </button>
             </li>
           );
         })}
