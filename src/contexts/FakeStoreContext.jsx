@@ -14,14 +14,13 @@ const FakeStoreContextProvider = (props) => {
   useEffect(() => {
     setLoading(true);
     axios.get("https://fakestoreapi.com/products").then((res) => {
-      console.log(res.data);
       setProducts(res.data);
       setLoading(false);
     });
   }, []);
 
   return loading ? (
-    <h1>Chargement...</h1>
+    <h1 data-testid="fakeStoreLoading">Chargement...</h1>
   ) : (
     <FakeStoreContext.Provider value={products}>
       {children}
