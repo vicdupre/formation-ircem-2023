@@ -3,8 +3,26 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Counter from "./components/Counter";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment, reset } from "./redux/slices/counterSlice";
 
 function App() {
+  const counter = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+
+  const handleIncrement = () => {
+    dispatch(increment());
+  };
+
+  const handleDecrement = () => {
+    dispatch(decrement());
+  };
+
+  const handleReset = () => {
+    dispatch(reset());
+  };
+
   return (
     <>
       <div>
@@ -16,6 +34,12 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <Counter
+        value={counter}
+        onDecrement={handleDecrement}
+        onIncrement={handleIncrement}
+        onReset={handleReset}
+      />
       <Navbar />
       <Outlet />
       <p className="read-the-docs">

@@ -6,7 +6,6 @@ import Input from "../components/Input";
 import Clock from "../components/Clock";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addPerson, removePerson } from "../redux/actions/peopleActions";
 
@@ -31,7 +30,6 @@ const Home = () => {
 
   const people = useSelector((state) => state.people);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",

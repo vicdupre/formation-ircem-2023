@@ -22,6 +22,9 @@ const Navbar = () => {
       <NavLink style={linkStyles} to="/products">
         Produits
       </NavLink>
+      <NavLink style={linkStyles} to="/posts">
+        Posts
+      </NavLink>
     </nav>
   );
 };

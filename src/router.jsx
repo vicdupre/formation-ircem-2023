@@ -4,6 +4,7 @@ import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
+import Posts from "./pages/Posts";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         path: "product/:productId",
         element: <Product />,
         errorElement: <NotFound />,
+      },
+      {
+        element: <Posts />,
+        path: "posts",
       },
     ],
   },

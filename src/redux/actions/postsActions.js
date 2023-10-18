@@ -1,6 +1,6 @@
 import { createAction, nanoid } from "@reduxjs/toolkit";
 
-const addPost = createAction("ADD_POST", ({ title, content }) => {
+const addPost = createAction("ADD_POST", (title, content) => {
   return {
     payload: {
       title,
